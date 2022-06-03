@@ -16,7 +16,6 @@ class Solution:
         while queue:
             current = queue.popleft()
             current.left, current.right = current.right, current.left
-            
             if current.left:
                 queue.append(current.left)
             if current.right:
