@@ -5,22 +5,38 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-#     Iterative DFS - Stack
+#     Iterative BFS - Queue
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
         
+        queue = collections.deque([[root,1]])
         max_depth = 0
-        stack = collections.deque([[root,1]])
-        while stack:
-            current = stack.pop()
+        while queue:
+            current = queue.popleft()
             if current[0].left:
-                stack.append([current[0].left,current[1] + 1])
+                queue.appendleft([current[0].left,current[1]+ 1])
             if current[0].right:
-                stack.append([current[0].right,current[1] + 1])
-                
-            max_depth = max(max_depth, current[1])
+                queue.appendleft([current[0].right,current[1] + 1])
+            max_depth = max(current[1], max_depth)
+            
         return max_depth
+#     Iterative DFS - Stack
+#     def maxDepth(self, root: Optional[TreeNode]) -> int:
+#         if not root:
+#             return 0
+        
+#         max_depth = 0
+#         stack = collections.deque([[root,1]])
+#         while stack:
+#             current = stack.pop()
+#             if current[0].left:
+#                 stack.append([current[0].left,current[1] + 1])
+#             if current[0].right:
+#                 stack.append([current[0].right,current[1] + 1])
+                
+#             max_depth = max(max_depth, current[1])
+#         return max_depth
         
         
         
