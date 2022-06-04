@@ -18,5 +18,6 @@ class Solution:
             res[0] = max(res[0], left + right)
             
             return max(left + 1, right + 1)
+        #why did I add a + 1 there because at every point when the node returns something back to its parent you need to add 1 because that is the number of number of nodes under the parent
         dfs(root)
         return res[0]
