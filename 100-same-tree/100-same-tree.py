@@ -8,19 +8,14 @@ class Solution:
     def dfs(self, one, two):
         if not one and not two:
             return True
-        
         if not one or not two:
             return False
         
         left = self.dfs(one.left, two.left)
         right = self.dfs(one.right, two.right)
         
-        if left == False or right == False or one.val != two.val:
+        if not left or not right or one.val != two.val:
             return False
-        
         return True
-        
-            
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         return self.dfs(p,q)
-        
