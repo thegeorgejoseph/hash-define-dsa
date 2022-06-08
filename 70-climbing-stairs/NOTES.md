@@ -19,14 +19,3 @@ Caching, we can store the number of ways to reach something at that node and the
 How to define a base case?
 ​
 > How many ways can we reach 5 starting at 5? 1
-> How many ways can we reach 5 starting at 4? 1
-​
-> How many ways can we reach 5 starting at 3? (4) + (5) = 1 + 1 = 2
-​
-> i.e OPT(n) = OPT(n-2) + OPT(n-1)
-​
-### During implementation you can either implement it like the logic above which is easy to understand but hard to iteratte over because we will have to iterate in reverse or we can implement in reverse and take the solution from the end.
-​
-> Since solution does not actually require the entire array to be in memory we can do the whole thing using just two variables that start at the base case.
-​
-​
