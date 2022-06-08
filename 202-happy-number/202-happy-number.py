@@ -1,20 +1,18 @@
 class Solution:
-    def findSumOfSquares(self, n):
-        result = 0 
-        while n: 
-            result += (n  % 10) ** 2
-            n = n // 10
-        return result
     def isHappy(self, n: int) -> bool:
-#         Mathematics way of doing it!
-#         the thing loops forever, whether or not you get the happy nyumber or not. so essentally this is a hash set problem because we are just looking for numbers that has already been visited before, and we do not want to keep repeating it!
+#         variation of Floyd Warshall's Algorithm to find cycles
 
-        visited = set()
-        while n not in visited:
-            if n == 1:
-                return True
-            visited.add(n)
-            n = self.findSumOfSquares(n)
+        def get_next(n):
+            result = 0
+            while n :
+                n, remainder = divmod(n, 10)
+                result += remainder ** 2
+            return result
+        
+        slow = n
+        fast = get_next(n) #start the fast pointer from the next one
+        while fast != 1 and fast != slow:
+            slow = get_next(slow)
+            fast = get_next(get_next(fast))
             
-        return False
-            
+        return fast == 1
