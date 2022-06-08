@@ -1,2 +1,2 @@
 # hash-define-dsa
-Collection of LeetCode questions to ace the coding interview! 
+Collection of LeetCode questions from Summer 2022!
