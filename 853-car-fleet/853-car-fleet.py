@@ -5,8 +5,7 @@ class Solution:
         pairs.sort(key = lambda x: x[0])
         stack = collections.deque([])
         for d,s in pairs[::-1]:
-            t = (target-d) / s
-            stack.append(t)
+            stack.append((target - d) / s)
             if len(stack) >= 2 and stack[-2] >= stack[-1]:
                 stack.pop()
         return len(stack)
