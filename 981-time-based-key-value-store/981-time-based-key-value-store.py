@@ -1,13 +1,14 @@
 class TimeMap:
 
     def __init__(self):
-        self.store = collections.defaultdict(list)
+        # self.store = collections.defaultdict(list)
+        self.store = {}
         
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        # if key not in self.store:
-        #     self.store[key] = []
-        #using defaultdict to make code smaller
+        if key not in self.store:
+            self.store[key] = []
+        #use defaultdict to make code smaller
         self.store[key].append([value,timestamp])
         
 
