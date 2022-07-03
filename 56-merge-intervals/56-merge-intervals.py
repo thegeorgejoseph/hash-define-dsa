@@ -7,6 +7,6 @@ class Solution:
             lastEnd = res[-1][1]
             if start <= lastEnd:
                 res[-1][1] = max(lastEnd, end)
-            else:
+            elif start > lastEnd:
                 res.append([start,end])
         return res
