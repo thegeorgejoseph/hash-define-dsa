@@ -3,11 +3,10 @@ class Solution:
         left, right = 0, len(nums) - 1
         while left <= right:
             mid = left + ((right - left) // 2)
-            if nums[mid] == target:
+            if target == nums[mid]:
                 return mid
             
             if nums[left] <= nums[mid]:
-                #left sorted
                 if target < nums[left] or target > nums[mid]:
                     left = mid + 1
                 else:
