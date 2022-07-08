@@ -6,7 +6,7 @@ class Solution:
 # if the target is larger than the middle element then we need to search the second half
         left, right = 0, len(nums) - 1
         while left <= right:
-            mid = left + ((right - left) // 2 ) # (right + left) // 2 can lead to overflow of 32 bit integers
+            mid = left + ((right - left) // 2)
             if nums[mid] == target:
                 return mid
             elif nums[mid] < target:
