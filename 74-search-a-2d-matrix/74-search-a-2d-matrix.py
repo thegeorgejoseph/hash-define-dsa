@@ -4,14 +4,14 @@ class Solution:
         if m == 0:
             return False
         n = len(matrix[0])
-        left, right = 0, m * n - 1
+        left, right = 0, (m * n ) - 1
         while left <= right:
-            pivot = left + ((right - left)//2)
-            element = matrix[pivot // n][pivot % n] #divide by number of columns
-            if element == target:
+            pivot = left + ((right - left) // 2)
+            mid = matrix[pivot // n][pivot % n]
+            if mid == target:
                 return True
-            elif element < target:
-                left = pivot + 1
-            else:
+            elif mid > target:
                 right = pivot - 1
+            else:
+                left = pivot + 1
         return False
