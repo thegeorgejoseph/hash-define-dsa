@@ -4,15 +4,13 @@ class Solution:
 #         strings are immutable so we can easily use that as hash keys but so are tuples and they are very easy to create
 # dict.keys() and dict.values() both return a list
 
-        result = defaultdict(list)
+        res = collections.defaultdict(list)
         for string in strs:
             count = [0] * 26
             for char in string:
                 count[ord(char) - ord('a')] += 1
-            
-            result[tuple(count)].append(string)
-        
-        return result.values()
+            res[tuple(count)].append(string)
+        return res.values()
         
 #     def getFrequencies(self,string):
 #         frequency = defaultdict(lambda: 0)
