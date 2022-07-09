@@ -5,9 +5,8 @@ class Solution:
         #check if left sorted array by nums[left] <= nums[mid]
         res = nums[0]
         left, right = 0, len(nums) - 1
-        while left <= right :
-            if nums[left] < nums[right]:
-                #works because distinct elements
+        while left <= right:
+            if nums[left] <= nums[right]:
                 res = min(res, nums[left])
                 break
             mid = left + ((right - left) // 2)
