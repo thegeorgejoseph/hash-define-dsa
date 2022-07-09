@@ -12,7 +12,7 @@ class Solution:
         #     if num in visited:
         #         return True
         #     visited[num] = True
-        return False
+        # return False
         # O(n**2) ST algorithm
         # n = len(nums)
         # for i in range(n):
