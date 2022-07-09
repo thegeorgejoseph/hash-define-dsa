@@ -10,23 +10,18 @@ class Solution:
         # 2. if new letter not in the bank then it cannot be an anagram
         
         
-        n = len(s)
-        m = len(t)
-        if n != m :
+        m, n = len(s), len(t)
+        if m != n:
             return False
         
-        letter_bank  = defaultdict(lambda: 0) # defaultdict spec from docs
-        for letter in s : 
-            letter_bank[letter] += 1
-            
-        for letter in t:
-             if letter not in letter_bank:
-                    return False
-             else:
-                if letter_bank[letter] == 0:
-                    return False
-                letter_bank[letter] -= 1
-                
+        counts = {}
+        for char in s:
+            counts[char] = 1 + counts.get(char, 0)
+        
+        for char in t:
+            if char not in counts or counts[char] == 0:
+                return False
+            counts[char] -= 1
         return True
         # Wrong interpretation of the question! Question asked for Anagram, I solved for Palindrome.
 #         n = len(s)
