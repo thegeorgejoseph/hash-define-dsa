@@ -1,49 +1,28 @@
 class Solution:
-    def isValidCharacter(self, char):
-        ascii_char = ord(char)
-        if ascii_char >= 97 and ascii_char <= 122:
-            return char
-        elif ascii_char >= 65 and ascii_char <= 90:
-            return chr(ascii_char + 32)
-        elif ascii_char >=48 and ascii_char <=57:
-            return char
-        else:
-            return "Invalid"
+    def isValid(self, s):
+        _ascii = ord(s)
+        if _ascii >= 97 and _ascii <= 122:
+            return s
+        if _ascii >= 65 and _ascii <= 90:
+            return chr(_ascii + 32)
+        if _ascii >= 48 and _ascii <= 57:
+            return s
+        return "invalid"
     def isPalindrome(self, s: str) -> bool:
-#         i, j = 0, len(s) - 1
-
-#         while i < j:
-#             while i < j and not s[i].isalnum():
-#                 i += 1
-#             while i < j and not s[j].isalnum():
-#                 j -= 1
-
-#             if s[i].lower() != s[j].lower():
-#                 return False
-
-#             i += 1
-#             j -= 1
-
-        # return True
-        n = len(s)
-        if n == 0 or n == 1:
-            return True
-        start = 0
-        end = n -1 
-        while start <= end:
-            first = self.isValidCharacter(s[start])
-            last = self.isValidCharacter(s[end])
-            if first == "Invalid":
-                start += 1
-                continue
-            if last == "Invalid":
-                end -= 1
-                continue
-            if first == last:
-                start += 1
-                end -= 1
-                continue
-            else:
-                return False
+        left = 0
+        right = len(s) - 1
         
+        while left <= right:
+            leftChar = self.isValid(s[left])
+            rightChar = self.isValid(s[right])
+            if leftChar == "invalid":
+                left += 1
+                continue
+            if rightChar == "invalid":
+                right -= 1
+                continue
+            if leftChar != rightChar:
+                return False
+            left += 1
+            right -= 1
         return True
