@@ -6,23 +6,23 @@
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
-        headOne, headTwo = list1, list2
         current = dummy
+        headOne, headTwo = list1, list2
+        
         while headOne is not None and headTwo is not None:
             if headOne.val <= headTwo.val:
-                temp = headOne.next
+                temp1 = headOne.next
                 current.next = headOne
-                current = headOne
-                headOne = temp
+                current = current.next
+                headOne = temp1
             else:
-                temp = headTwo.next
+                temp2 = headTwo.next
                 current.next = headTwo
-                current = headTwo
-                headTwo = temp
-                
-        if headOne is not None:
+                current = current.next
+                headTwo = temp2
+        if headOne:
             current.next = headOne
-        if headTwo is not None:
+        if headTwo:
             current.next = headTwo
         return dummy.next
         
