@@ -4,20 +4,22 @@ class Solution:
         if n < 3:
             return []
         res = []
-        nums.sort()
-        for index, val in enumerate(nums):
-            if index > 0 and val == nums[index - 1]:
+        nums.sort() 
+        #why do you keep forgetting to sort it?
+        for index, num in enumerate(nums):
+            # we need to ensure that we are not starting from the same number again too!
+            if index > 0 and nums[index] == nums[index-1]:
                 continue
-            left, right = index + 1, n -1
+            left, right = index + 1, n - 1
             while left < right:
-                threeSum = val + nums[left] + nums[right]
-                if threeSum < 0:
+                threesum = num + nums[left] + nums[right]
+                if threesum < 0:
                     left += 1
-                elif threeSum > 0 :
+                elif threesum > 0:
                     right -= 1
                 else:
-                    res.append([val, nums[left], nums[right]])
-                    left += 1 # why only left is updated? because the other two conditions handles the rest
-                    while nums[left] == nums[left - 1] and left < right:
+                    res.append([num, nums[left], nums[right]])
+                    left += 1
+                    while left < right and nums[left] == nums[left - 1]:
                         left += 1
         return res
