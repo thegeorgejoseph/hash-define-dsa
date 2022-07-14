@@ -1,24 +1,23 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         if not height: return 0
-        res = 0
         left, right = 0, len(height) - 1
-        
-        leftMaxHeight, rightMaxHeight = height[left], height[right]
+        res = 0
+        maxLeftHeight, maxRightHeight = height[left], height[right]
         
         while left < right:
-            if leftMaxHeight <= rightMaxHeight:
+            if maxLeftHeight <= maxRightHeight:
                 left += 1
-                temp = leftMaxHeight - height[left] if leftMaxHeight - height[left] >= 0 else 0
+                temp = maxLeftHeight - height[left] if maxLeftHeight - height[left] >= 0 else 0
+                maxLeftHeight = max(maxLeftHeight, height[left])
                 res += temp
-                leftMaxHeight = max(leftMaxHeight, height[left])
             else:
                 right -= 1
-                temp = rightMaxHeight - height[right] if rightMaxHeight - height[right] >= 0 else 0
+                temp = maxRightHeight - height[right] if maxRightHeight - height[right] >= 0 else 0
+                maxRightHeight = max(maxRightHeight, height[right])
                 res += temp
-                rightMaxHeight = max(rightMaxHeight, height[right])
         return res
-    
+        
 #         nums= height
 #         prefix = [i for i in height]
         
