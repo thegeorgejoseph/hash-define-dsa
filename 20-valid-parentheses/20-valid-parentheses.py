@@ -3,16 +3,18 @@ class Solution:
 # valid case : [], [()]
 # invalid case: ][, [), [, ]
     def isValid(self, s: str) -> bool:
-        map = {")" : "(", "}" : "{", "]" : "["}
-        stack = []
-        for char in s:
-            if char in map:
-                if not stack:
-                    return False
-                if stack[-1] == map[char]:
-                    stack.pop()
-                else:
+        hashmap = {"}": "{", "]" : "[", ")" : "(" } 
+        stack = collections.deque()
+        
+        for par in s:
+            if len(stack) == 0 and par in hashmap:
+                return False
+            
+            if par in hashmap:
+                top = stack.pop()
+                if top != hashmap[par]:
                     return False
             else:
-                stack.append(char)
+                stack.append(par)
+        
         return True if len(stack) == 0 else False
