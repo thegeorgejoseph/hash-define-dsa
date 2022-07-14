@@ -7,16 +7,20 @@ class Solution:
 # if rightVal - leftVal = +ve then update right pointer and max_profit
 # O(n) time and O(1) space
 
-        left, right = 0, 1
         n = len(prices)
-        max_profit = 0
-        while right < n : 
-            if prices[left] > prices[right]:
+        if n < 2:
+            return 0
+        if n == 2 and prices[1] < prices[0]:
+            return 0
+        res = 0
+        left, right = 0, 1
+        while right < n:
+            profit = prices[right] - prices[left]
+            if profit < 0:
                 left = right
-            else:
-                max_profit = max(max_profit,prices[right] - prices[left])
-                
-            right += 1
+                right = left + 1 
+                continue
             
-        return max_profit
-        
+            res = max(res, profit)
+            right += 1
+        return res
