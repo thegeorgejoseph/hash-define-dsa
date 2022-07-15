@@ -3,15 +3,17 @@ class Solution:
         stack = collections.deque([])
         for token in tokens:
             if token == "+":
-                stack.append(int(stack.pop()) + int(stack.pop()))
+                b, a = int(stack.pop()), int(stack.pop())
+                stack.append(str(a + b))
             elif token == "-":
-                a, b = int(stack.pop()), int(stack.pop())
-                stack.append(b - a)
+                b, a = int(stack.pop()), int(stack.pop())
+                stack.append(str(a - b))
             elif token == "*":
-                stack.append(int(stack.pop()) * int(stack.pop()))
+                b, a = int(stack.pop()), int(stack.pop())
+                stack.append(str(a * b))
             elif token == "/":
-                a, b = int(stack.pop()),int(stack.pop())
-                stack.append(int(b / a)) #integer division not floating point division
+                b, a = int(stack.pop()), int(stack.pop())
+                stack.append(int(a / b))
             else:
-                stack.append(int(token))
-        return stack.pop()
+                stack.append(token)
+        return int(stack.pop())
