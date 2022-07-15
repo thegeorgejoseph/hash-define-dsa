@@ -2,17 +2,20 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         res = []
         stack = collections.deque([])
-        def backtrack(openCount, closedCount):
-            if openCount == closedCount == n:
+        
+        def backtrack(openBrackets, closedBrackets):
+            if openBrackets == closedBrackets == n :
                 res.append("".join(stack))
                 return
-            if openCount < n:
+            if openBrackets < n:
                 stack.append("(")
-                backtrack(openCount + 1, closedCount)
+                backtrack(openBrackets + 1, closedBrackets)
                 stack.pop()
-            if closedCount < openCount:
+            if closedBrackets < openBrackets:
                 stack.append(")")
-                backtrack(openCount, closedCount + 1)
+                backtrack(openBrackets, closedBrackets + 1)
                 stack.pop()
+            
+        
         backtrack(0,0)
         return res
