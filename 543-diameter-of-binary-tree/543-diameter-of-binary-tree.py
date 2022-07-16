@@ -5,20 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def dfs(self, node,res):
+    def dfs(self, node, res):
         if not node:
-                return 0
-            
-        left = self.dfs(node.left,res)
-        right = self.dfs(node.right,res)
-
-        res[0] = max(res[0], left + right)
-
-        return max(left + 1, right + 1)
-    
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        res = [0] #global variable that is being accessed by the recursive function
+            return -1
+        leftHeight = self.dfs(node.left, res)
+        rightHeight = self.dfs(node.right, res)
+        res[0] = max(res[0], leftHeight + rightHeight + 2)
         
-        #why did I add a + 1 there because at every point when the node returns something back to its parent you need to add 1 because that is the number of number of nodes under the parent
-        self.dfs(root,res)
+        return max(leftHeight + 1, rightHeight +1 )
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        res = [0]
+        
+        self.dfs(root, res)
         return res[0]
