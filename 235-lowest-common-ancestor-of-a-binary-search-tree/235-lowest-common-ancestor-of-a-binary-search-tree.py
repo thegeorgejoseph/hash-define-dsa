@@ -7,31 +7,13 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        p_val = p.val
-        q_val = q.val
-        root_val = root.val
         stack = collections.deque([root])
         while stack:
-            node = stack.pop()
-            if p_val < node.val and q_val < node.val:
-                stack.append(node.left)
-            elif p_val > node.val and q_val > node.val:
-                stack.append(node.right)
+            top = stack.pop()
+            if p.val < top.val and q.val < top.val:
+                stack.append(top.left)
+            elif p.val > top.val and q.val > top.val:
+                stack.append(top.right)
             else:
-                return node
-        
-#         if not root:
-#             return False
-        
-#         p_val = p.val
-#         q_val = q.val
-#         root_val = root.val
-        
-#         if p_val < root_val and q_val < root_val:
-#             return self.lowestCommonAncestor(root.left, p, q)
-#         elif p_val > root_val and q_val > root_val:
-#             return self.lowestCommonAncestor(root.right, p, q)
-#         else:
-#             return root
-        
+                return top
         
