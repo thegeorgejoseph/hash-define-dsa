@@ -6,16 +6,31 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        #solution without extra space
-        def dfs(node, max_so_far):
+        
+        def dfs(node, maxSoFar):
             if not node:
                 return 0
-            left = dfs(node.left, max(max_so_far, node.val))
-            right = dfs(node.right, max(max_so_far, node.val))
-            res = left + right
-            res += 1 if max_so_far <= node.val else 0
-            return res
+            
+            left = dfs(node.left,max(maxSoFar, node.val))
+            right = dfs(node.right, max(maxSoFar, node.val))
+            
+            if node.val >= maxSoFar:
+                return left + right + 1
+            elif node.val < maxSoFar:
+                return left + right 
+        
         return dfs(root, root.val)
+            
+        #solution without extra space
+        # def dfs(node, max_so_far):
+        #     if not node:
+        #         return 0
+        #     left = dfs(node.left, max(max_so_far, node.val))
+        #     right = dfs(node.right, max(max_so_far, node.val))
+        #     res = left + right
+        #     res += 1 if max_so_far <= node.val else 0
+        #     return res
+        # return dfs(root, root.val)
         #This is using extra memory even though the time complexity is not affected, lets try passing the solution up
 #         count = [0]
 #         def dfs(node, max_so_far,count):
