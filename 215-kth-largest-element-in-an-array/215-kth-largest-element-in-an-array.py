@@ -11,12 +11,12 @@ class Solution:
                     p += 1
             nums[p], nums[r] = nums[r], nums[p]
             if p > k:
-                return quickSelect(l, p - 1)
-            elif p < k:
+                return quickSelect(l, p- 1)
+            if p < k:
                 return quickSelect(p+ 1, r)
             else:
                 return nums[p]
-        return quickSelect(0,len(nums)-1)
+        return quickSelect(0, len(nums)-1)
         # return sorted(nums)[len(nums)-k]
         # k = len(nums) - k
         # heapq.heapify(nums)
