@@ -7,11 +7,11 @@ class Solution:
                 return 
             if i == len(candidates) or total > target:
                 return
-            
+            #choosing to add it
             current.append(candidates[i])
             dfs(i, total + candidates[i], current)
+            #not choosing to add it anymore
             current.pop()
-            dfs(i + 1, total, current)
-        
+            dfs(i+1, total, current)
         dfs(0,0,[])
         return res
