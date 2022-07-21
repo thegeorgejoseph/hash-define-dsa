@@ -3,25 +3,59 @@ class Solution:
         if not grid:
             return 0
         
-        ROWS, COLS = len(grid), len(grid[0])
-        visit = set()
         res = 0
-        def dfs(r,c):
-            if (r < 0 or c < 0 or r == ROWS or c == COLS or (r,c) in visit or grid[r][c] == "0"):
-                return
-            
+        visit = set()
+        ROWS, COLS = len(grid), len(grid[0])
+        
+        def bfs(r,c):
+            queue = deque([(r,c)])
             visit.add((r,c))
-            directions = [[0,1],[1,0],[-1,0],[0,-1]]
-            for dr, dc in directions:
-                dfs(r + dr, c + dc)
+            directions = [[1,0],[0,1],[-1,0],[0,-1]]
+            while queue:
+                ir, ic = queue.popleft() #changing this to pop will result in DFS
+                for dr, dc in directions:
+                    xr, xc = ir + dr, ic + dc
+                    if (xr < 0 or xc < 0 or xr >= ROWS or xc >= COLS or (xr,xc) in visit or grid[xr][xc] == "0"):
+                        continue
+                    visit.add((xr,xc))
+                    queue.append((xr,xc))
             
-    
+            
+            
         for r in range(ROWS):
             for c in range(COLS):
-                if grid[r][c] == "1" and (r,c) not in visit:
+                if (r,c) not in visit and grid[r][c] == "1":
                     res += 1
-                    dfs(r,c)
+                    bfs(r,c)
         return res
+        
+        
+        
+        
+        
+        
+#         if not grid:
+#             return 0
+        
+#         ROWS, COLS = len(grid), len(grid[0])
+#         visit = set()
+#         res = 0
+#         def dfs(r,c):
+#             if (r < 0 or c < 0 or r == ROWS or c == COLS or (r,c) in visit or grid[r][c] == "0"):
+#                 return
+            
+#             visit.add((r,c))
+#             directions = [[0,1],[1,0],[-1,0],[0,-1]]
+#             for dr, dc in directions:
+#                 dfs(r + dr, c + dc)
+            
+    
+#         for r in range(ROWS):
+#             for c in range(COLS):
+#                 if grid[r][c] == "1" and (r,c) not in visit:
+#                     res += 1
+#                     dfs(r,c)
+#         return res
         
         
         
