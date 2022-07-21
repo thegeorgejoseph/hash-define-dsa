@@ -7,16 +7,17 @@ class Solution:
         return True
     def partition(self, s: str) -> List[List[str]]:
         res = []
-        partition = []
         
-        def dfs(i):
-            if i >= len(s):
+        def backtrack(i, partition):
+            if i == len(s):
                 res.append(partition[:])
-                return
+                return 
             for j in range(i, len(s)):
                 if self.isPalindrome(s,i,j):
                     partition.append(s[i:j+1])
-                    dfs(j+1)
+                    backtrack(j + 1, partition)
                     partition.pop()
-        dfs(0)
+            
+            
+        backtrack(0, [])
         return res
