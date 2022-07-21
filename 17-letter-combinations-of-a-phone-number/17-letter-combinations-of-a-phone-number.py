@@ -1,23 +1,25 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         res = []
-        mapToString = {
-            "2": "abc",
+        mapping = {
+             "2": "abc",
             "3": "def",
             "4": "ghi",
-            "5": "jkl",
-            "6": "mno",
-            "7": "pqrs",
-            "8": "tuv",
-            "9": "wxyz"
+             "5": "jkl",
+             "6": "mno",
+             "7": "pqrs",
+             "8": "tuv",
+             "9": "wxyz"
         }
-        def backtrack(i, curString):
-            if len(curString) == len(digits):
-                res.append(curString)
-                return
-            for c in mapToString[digits[i]]:
-                backtrack(i+1,curString+c)
         
-        if digits:
-            backtrack(0,"")
+        def dfs(i, string):
+            if i == len(digits):
+                res.append(string)
+                return 
+            for char in mapping[digits[i]]:
+                string += char
+                dfs(i + 1, string)
+                string = string[:-1]
+            
+        if digits: dfs(0, "")
         return res
