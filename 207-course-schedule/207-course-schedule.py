@@ -1,25 +1,24 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        preMap = {i : [] for i in range(numCourses)}
-        # for i in range(numCourses):
-        #     preMap[i] = []
+        dependencyMap = {i : [] for i in range(numCourses)}
         visit = set()
-        for cur, pre in prerequisites:
-            preMap[cur].append(pre)
+        for course, prereq in prerequisites:
+            dependencyMap[course].append(prereq)
         
-        def dfs(course):
+        def backtrack(course):
             if course in visit:
                 return False
-            if not preMap[course]:
+            if not dependencyMap[course]:
                 return True
-            
             visit.add(course)
-            for pre in preMap[course]:
-                if not dfs(pre): return False
-            visit.remove(course) # so that we can check for other cycles
-            preMap[course] = [] # so that we know that this one has no pre reqs
+            for crs in dependencyMap[course]:
+                if not backtrack(crs): return False
+            visit.remove(course)
+            dependencyMap[course] = []
             return True
-        
-        for key, values in preMap.items():
-            if not dfs(key): return False
+            
+            
+            
+        for course, _ in dependencyMap.items():
+            if not backtrack(course): return False
         return True
