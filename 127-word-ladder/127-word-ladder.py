@@ -3,17 +3,15 @@ class Solution:
         if endWord not in wordList:
             return 0
         
-        patternMap = collections.defaultdict(list)
         wordList.append(beginWord)
-        
+        graph = collections.defaultdict(list)
         for word in wordList:
             for j in range(len(word)):
                 pattern = word[:j] + "*" + word[j + 1:]
-                patternMap[pattern].append(word)
-        
-        visit = set()
-        visit.add(beginWord)
+                graph[pattern].append(word)
+            
         queue = deque([beginWord])
+        visit = set([beginWord])
         res = 1
         
         while queue:
@@ -23,12 +21,9 @@ class Solution:
                     return res
                 for j in range(len(word)):
                     pattern = word[:j] + "*" + word[j + 1:]
-                    for neiWord in patternMap[pattern]:
-                        if neiWord not in visit:
-                            visit.add(neiWord)
-                            queue.append(neiWord)
-            
+                    for neighbor in graph[pattern]:
+                        if neighbor not in visit:
+                            visit.add(neighbor)
+                            queue.append(neighbor)
             res += 1
-        
         return 0
-        
