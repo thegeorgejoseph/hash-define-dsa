@@ -1,41 +1,23 @@
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        edges = collections.defaultdict(list)
-        for u,v,w in times:
-            edges[u].append((v,w))
-        
+        graph = collections.defaultdict(list)
         minHeap = [[0,k]]
+        time = 0
         visit = set()
-        t = 0
-        while minHeap:
-            p1, n1 = heapq.heappop(minHeap)
-            if n1 in visit:
+        
+        for u,v,c in times:
+            graph[u].append([c,v])
+        
+        while minHeap and len(visit) < n:
+            minCost, i = heapq.heappop(minHeap)
+            if i in visit:
                 continue
             
-            visit.add(n1)
-            t = max(t, p1)
+            visit.add(i)
+            time = max(time, minCost)
             
-            for n2, p2 in edges[n1]:
-                if n2 not in visit:
-                    heapq.heappush(minHeap, [p1 + p2, n2])
-                    
-        return t if len(visit) == n else -1
+            for cost, j in graph[i]:
+                if j not in visit:
+                    heapq.heappush(minHeap, [cost + minCost, j])
         
-#         edges = collections.defaultdict(list)
-#         for u, v, w in times:
-#             edges[u].append((v, w))
-        
-#         minHeap = [(0, k)]
-#         visit = set()
-#         t = 0
-#         while minHeap:
-#             w1, n1 = heapq.heappop(minHeap)
-#             if n1 in visit:
-#                 continue
-#             visit.add(n1)
-#             t = max(t, w1)
-            
-#             for n2, w2 in edges[n1]:
-#                 if n2 not in visit:
-#                     heapq.heappush(minHeap, (w1 + w2, n2))
-#         return t if len(visit) == n else -1
+        return time if len(visit) == n else -1
