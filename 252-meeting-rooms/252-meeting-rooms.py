@@ -1,12 +1,14 @@
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-#         Python you can sort a mutable object like list using .sort(key = lambda x: x[0])
         if not intervals:
             return True
         intervals.sort(key = lambda x: x[0])
         previousInterval = intervals[0]
-        for interval in intervals[1:]:
-            if interval[0] < previousInterval[1]:
+        
+        for i in range(1,len(intervals)):
+            newInterval = intervals[i]
+            if newInterval[0] < previousInterval[1]:
                 return False
-            previousInterval = interval
+            previousInterval = [min(previousInterval[0], newInterval[0]),max(previousInterval[1], newInterval[1])]
+        
         return True
