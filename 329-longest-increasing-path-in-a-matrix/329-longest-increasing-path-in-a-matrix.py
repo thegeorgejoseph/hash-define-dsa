@@ -18,8 +18,9 @@ class Solution:
             dp[(r,c)] = res
             return res
         
+        LIP = 1
         for r in range(ROWS):
             for c in range(COLS):
-                dfs(r,c,-1)
+                LIP = max(LIP, dfs(r,c,-1))
         
-        return max(dp.values())
+        return LIP
