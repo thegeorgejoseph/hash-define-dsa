@@ -5,6 +5,7 @@ class Solution:
         counts = {}
         for n in hand:
             counts[n] = 1 + counts.get(n,0)
+        
         minHeap = list(counts.keys())
         heapq.heapify(minHeap)
         
