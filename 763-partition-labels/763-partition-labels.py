@@ -1,20 +1,17 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
         res = []
-        index = {}
-        for i,c in enumerate(s):
-            index[c] = i
-        
-        maxIdxSoFar = index[s[0]]
-        left = -1
+        counts = {}
         for i, c in enumerate(s):
-            if i > maxIdxSoFar:
-                res.append(maxIdxSoFar - left)
-                left = maxIdxSoFar
-            maxIdxSoFar = max(maxIdxSoFar, index[c])
-                
-        res.append(maxIdxSoFar - left)
+            counts[c] = i
+            
+        maxIdx = counts[s[0]]
+        left = 0
+        for i in range(len(s)):
+            if i > maxIdx:
+                res.append(maxIdx - left + 1 )
+                left = maxIdx + 1
+            maxIdx = max(maxIdx, counts[s[i]])
+        
+        res.append(maxIdx - left + 1)
         return res
-            
-                    
-            
