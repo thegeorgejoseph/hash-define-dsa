@@ -13,7 +13,7 @@ class Solution:
                 res.append(matrix[i][right])
             right -= 1
             
-            if not (top <= bottom and left <= right):
+            if not (left <= right and top <= bottom):
                 break
                 
             for i in range(right, left - 1, -1):
