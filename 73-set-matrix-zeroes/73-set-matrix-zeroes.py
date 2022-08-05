@@ -5,6 +5,7 @@ class Solution:
         """
         ROWS, COLS = len(matrix), len(matrix[0])
         rowZero = False
+        
         for i in range(ROWS):
             for j in range(COLS):
                 if matrix[i][j] == 0:
@@ -27,4 +28,3 @@ class Solution:
         if rowZero:
             for j in range(COLS):
                 matrix[0][j] = 0
-            
