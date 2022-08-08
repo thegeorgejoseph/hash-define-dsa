@@ -5,7 +5,6 @@ class Solution:
             mid = left + ((right - left) // 2)
             if target == nums[mid]:
                 return mid
-            
             if nums[left] <= nums[mid]:
                 if target < nums[left] or target > nums[mid]:
                     left = mid + 1
@@ -17,3 +16,7 @@ class Solution:
                 else:
                     left = mid + 1
         return -1
+    
+    # [1,2,3,4,5,6,7]
+    # [5,6,7,1,2,3,4]
+    # [5,6,7,1] -> what does it take to check the other half of this array
