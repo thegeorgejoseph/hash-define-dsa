@@ -1,21 +1,28 @@
 from collections import defaultdict
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        # pretty straight forward
-        # just create default dicts because you need a default value for every key in it
-        # neat
-        ROWS = defaultdict(set)
-        COLS = defaultdict(set)
-        cache = defaultdict(set)
-        
-        for i in range(9):
-            for j in range(9):
-                curr = board[i][j]
-                if curr == ".":
+        ROWS, COLS = len(board), len(board[0])
+        valid = "123456789"
+        row_set = defaultdict(set)
+        col_set = defaultdict(set)
+        quad_set = defaultdict(set)
+        for i in range(ROWS):
+            for j in range(COLS):
+                if board[i][j] == ".":
                     continue
-                if (curr in ROWS[i] or curr in COLS[j] or curr in cache[(i // 3, j // 3)]):
+                if (board[i][j] not in valid or board[i][j] in row_set[i] or
+                    board[i][j] in col_set[j] or board[i][j] in quad_set[(i // 3, j // 3)]):
                     return False
-                ROWS[i].add(curr)
-                COLS[j].add(curr)
-                cache[(i // 3, j // 3)].add(curr)
+                row_set[i].add(board[i][j])
+                col_set[j].add(board[i][j])
+                quad_set[(i // 3, j // 3)].add(board[i][j])
         return True
+    
+    
+    
+# we need a set to keep track of each row and column - map of sets? - defaultdict(set)
+# we need a set to keep track of the divided part of the board - (i // 3, j // 3)
+# double for loop and create the sets 
+#  anytime something is not "." check
+# if it is in between 1-9, and if it is not not there in the sets then add it to the sets, but if it is there in the sets return False
+# if it works return True
