@@ -6,15 +6,22 @@ class Solution:
                 res += (n % 10)**2
                 n = n // 10
             return res
+        slow, fast = n, squareSums(n)
+        while fast != 1 and fast != slow:
+            slow = squareSums(slow)
+            fast = squareSums(squareSums(fast))
         
-        visit = set()
-        while n != 1:
-            if n in visit:
-                return False
-            visit.add(n)
-            n = squareSums(n)
+        return fast == 1
         
-        return True
+#         visit = set()
+#         while n != 1:
+#             if n in visit:
+#                 return False
+#             visit.add(n)
+#             n = squareSums(n)
+        
+#         return True
+             
         
 #         variation of Floyd Warshall's Algorithm to find cycles
 
