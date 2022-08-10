@@ -1,8 +1,8 @@
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.end = False
-
+        self.isEnd = False
+        
 class WordDictionary:
 
     def __init__(self):
@@ -14,26 +14,23 @@ class WordDictionary:
             if char not in curr.children:
                 curr.children[char] = TrieNode()
             curr = curr.children[char]
-        curr.end = True
+        curr.isEnd = True
 
-    def search(self, word: str) -> bool:
-        
+    def search(self, word: str) -> bool:        
         def dfs(i, root):
             curr = root
             for j in range(i, len(word)):
-                #we need to check each letter in the word
                 char = word[j]
-                if char ==".":
-                    for child in curr.children.values():
-                        if dfs(j + 1, child): return True
+                if char == ".":
+                    for childNode in curr.children.values():
+                        if dfs(j + 1,childNode): return True
                     return False
                 else:
                     if char not in curr.children:
                         return False
                     curr = curr.children[char]
-            return curr.end
-            
-            
+            return curr.isEnd
+        
         return dfs(0, self.root)
 
 
