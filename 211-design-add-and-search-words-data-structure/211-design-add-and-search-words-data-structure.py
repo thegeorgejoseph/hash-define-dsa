@@ -3,10 +3,11 @@ class TrieNode:
         self.children = {}
         self.isEnd = False
 
+
 class WordDictionary:
 
     def __init__(self):
-        self.root = TrieNode()
+            self.root = TrieNode()
 
     def addWord(self, word: str) -> None:
         curr = self.root
@@ -22,16 +23,15 @@ class WordDictionary:
             curr = root
             for j in range(i, len(word)):
                 char = word[j]
-                if char == ".":
-                    for childNode in curr.children.values():
-                        if dfs(j + 1, childNode): return True
-                    return False
-                else:
+                if char != ".":
                     if char not in curr.children:
                         return False
                     curr = curr.children[char]
-            return curr.isEnd
-        
+                else:
+                    for childNode in curr.children.values():
+                        if dfs(j + 1, childNode): return True
+                    return False
+            return curr.isEnd 
         
         
         return dfs(0, self.root)
