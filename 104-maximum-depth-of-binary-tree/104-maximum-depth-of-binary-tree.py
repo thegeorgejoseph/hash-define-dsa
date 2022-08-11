@@ -20,11 +20,6 @@ class Solution:
                 stack.append((top.right, depth + 1))
         return res
             
-        
-        
-        
-        
-        
         # if not root:
         #     return 0
         # res = 0
