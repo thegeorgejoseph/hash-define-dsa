@@ -5,91 +5,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-#     Iterative BFS - Queue
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
         
-        def iterativebfs(node):
-            queue = collections.deque([[node,1]])
-            res = 0
-            while queue:
-                top, depth = queue.popleft()
-                if top.left:
-                    queue.append([top.left, depth + 1])
-                if top.right:
-                    queue.append([top.right, depth + 1])
-                res = max(res, depth)
-            return res
-        
-        def iterativedfs(node):
-            stack = collections.deque([[node,1]])
-            res = 0
-            while stack:
-                top, depth = stack.pop()
-                if top.left:
-                    stack.append([top.left,depth + 1])
-                if top.right:
-                    stack.append([top.right, depth + 1])
-                res = max(res, depth)
-            return res
-        
-        def recursivedfs(node, depth):
+        def dfs(node):
             if not node:
-                return depth
+                return 0
             
-            left = recursivedfs(node.left, depth + 1)
-            right = recursivedfs(node.right, depth + 1)
+            left = dfs(node.left)
+            right = dfs(node.right)
             
-            return max(left, right)
+            return max(left, right)  + 1
         
-        return iterativebfs(root)
-        
-#         if not root:
-#             return 0
-        
-#         queue = collections.deque([[root,1]])
-#         max_depth = 0
-#         while queue:
-#             current = queue.popleft()
-#             if current[0].left:
-#                 queue.appendleft([current[0].left,current[1]+ 1])
-#             if current[0].right:
-#                 queue.appendleft([current[0].right,current[1] + 1])
-#             max_depth = max(current[1], max_depth)
-            
-#         return max_depth
-#     Iterative DFS - Stack
-#     def maxDepth(self, root: Optional[TreeNode]) -> int:
-#         if not root:
-#             return 0
-        
-#         max_depth = 0
-#         stack = collections.deque([[root,1]])
-#         while stack:
-#             current = stack.pop()
-#             if current[0].left:
-#                 stack.append([current[0].left,current[1] + 1])
-#             if current[0].right:
-#                 stack.append([current[0].right,current[1] + 1])
-                
-#             max_depth = max(max_depth, current[1])
-#         return max_depth
-        
-        
-        
-        
-        
-#     Recursive DFS solution is not that great because 
-#     def maxDepthRecurse(self,node,depth):
-#         if not node:
-#             return depth
-#         leftMax = self.maxDepthRecurse(node.left, depth + 1)
-#         rightMax = self.maxDepthRecurse(node.right, depth + 1)
-        
-#         return max(leftMax, rightMax)
-#     def maxDepth(self, root: Optional[TreeNode]) -> int:
-#         if not root:
-#             return 0
-#         return self.maxDepthRecurse(root, 0)
-        
+        return dfs(root)
