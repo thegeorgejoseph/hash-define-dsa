@@ -7,7 +7,7 @@ class TrieNode:
 class WordDictionary:
 
     def __init__(self):
-            self.root = TrieNode()
+        self.root = TrieNode()
 
     def addWord(self, word: str) -> None:
         curr = self.root
@@ -29,13 +29,12 @@ class WordDictionary:
                     curr = curr.children[char]
                 else:
                     for childNode in curr.children.values():
-                        if dfs(j + 1, childNode): return True
+                        if dfs(j + 1,childNode): return True
                     return False
-            return curr.isEnd 
-        
+            return curr.isEnd
         
         return dfs(0, self.root)
-
+        
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
