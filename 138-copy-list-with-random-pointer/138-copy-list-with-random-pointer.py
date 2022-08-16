@@ -10,13 +10,13 @@ class Node:
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         cache = {None: None}
-        curr = head
-        while curr:
-            cache[curr] = Node(curr.val)
-            curr = curr.next
-        curr = head
-        while curr:
-            cache[curr].next = cache[curr.next]
-            cache[curr].random = cache[curr.random]
-            curr = curr.next
+        current = head
+        while current:
+            cache[current] = Node(current.val)
+            current = current.next
+        current = head
+        while current:
+            cache[current].next = cache[current.next]
+            cache[current].random = cache[current.random]
+            current = current.next
         return cache[head]
