@@ -6,11 +6,12 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-#         quickest way to test for cycles in a linked list
         slow, fast = head, head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            if fast == slow:
+            if slow == fast:
                 return True
         return False
+            
+        
