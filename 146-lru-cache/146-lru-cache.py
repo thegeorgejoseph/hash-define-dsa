@@ -3,6 +3,7 @@ class ListNode:
         self.key, self.val = key, value
         self.prev, self.next = None, None
 
+
 class LRUCache:
 
     def __init__(self, capacity: int):
@@ -14,9 +15,9 @@ class LRUCache:
     def remove(self, node):
         PREV, NEXT = node.prev, node.next
         PREV.next, NEXT.prev = NEXT, PREV
-        
+    
     def insert(self, node):
-        mru = self.most.prev
+        mru = self.most.prev 
         mru.next = node
         node.prev = mru
         node.next = self.most
@@ -28,7 +29,7 @@ class LRUCache:
             self.insert(self.cache[key])
             return self.cache[key].val
         return -1
-
+        
     def put(self, key: int, value: int) -> None:
         if key in self.cache:
             self.remove(self.cache[key])
@@ -40,6 +41,7 @@ class LRUCache:
             lru = self.least.next
             self.remove(lru)
             del self.cache[lru.key]
+        
 
 
 # Your LRUCache object will be instantiated and called as such:
