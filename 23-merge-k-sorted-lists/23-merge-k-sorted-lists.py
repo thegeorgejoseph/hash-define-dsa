@@ -4,10 +4,11 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeLists(self, l1, l2):
+    def mergeLists(self, list1,list2):
         dummy = ListNode(0, None)
         current = dummy
-        headOne, headTwo = l1, l2
+        headOne, headTwo = list1, list2
+        
         while headOne and headTwo:
             if headOne.val <= headTwo.val:
                 temp = headOne.next
@@ -19,14 +20,15 @@ class Solution:
                 current.next = headTwo
                 current = current.next
                 headTwo = temp
+                
         if headOne:
             current.next = headOne
         if headTwo:
             current.next = headTwo
+        
         return dummy.next
-    
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        if not lists or len(lists) == 0:
+        if not lists:
             return None
         
         while len(lists) > 1:
