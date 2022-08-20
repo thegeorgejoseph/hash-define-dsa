@@ -8,9 +8,10 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        hashmap = {}
         if not node:
             return None
+        
+        hashmap = {}
         
         def dfs(node):
             if node in hashmap:
@@ -21,6 +22,5 @@ class Solution:
                 hashmap[node].neighbors.append(dfs(n))
             
             return hashmap[node]
-        
         
         return dfs(node)
