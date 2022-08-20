@@ -1,29 +1,29 @@
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
-        graph = {i : [] for i in range(len(points))}
+        graph = defaultdict(list)
         
         for i in range(len(points)):
             x1, y1 = points[i]
-            for j in range(i + 1, len(points)):
+            for j in range(i, len(points)):
                 x2, y2 = points[j]
-                
-                distance = abs(x2 - x1) + abs(y2 - y1)
-                graph[i].append([distance, j])
-                graph[j].append([distance, i])
+                dist = abs(x2-x1) + abs(y2-y1)
+                graph[i].append([dist, j])
+                graph[j].append([dist, i])
         
+        minHeap = [[0,0]] #cost, index of point
         visit = set()
-        minHeap = [[0,0]] # cost, point index
         cost = 0
         
         while len(visit) < len(points):
-            distance, i = heapq.heappop(minHeap)
+            dist, i = heapq.heappop(minHeap)
             if i in visit:
                 continue
             
             visit.add(i)
-            cost += distance
+            cost += dist
+            
             for neiCost, j in graph[i]:
                 if j not in visit:
                     heapq.heappush(minHeap,[neiCost, j])
-        return cost
         
+        return cost
