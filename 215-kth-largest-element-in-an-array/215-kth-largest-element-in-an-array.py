@@ -5,6 +5,7 @@ class Solution:
         def quickSelect(l, r):
             if l == r:
                 return nums[l]
+            
             p, pivot = l, nums[r]
             for i in range(l, r):
                 if nums[i] <= pivot:
@@ -17,7 +18,5 @@ class Solution:
                 return quickSelect(l, p - 1)
             else:
                 return nums[p]
-            
-            
         
-        return quickSelect(0, len(nums) - 1)
+        return quickSelect(0, len(nums) -1)
