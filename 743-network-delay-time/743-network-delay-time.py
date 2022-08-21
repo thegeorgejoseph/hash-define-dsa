@@ -5,21 +5,20 @@ class Solution:
         for u,v,w in times:
             graph[u].append([w,v])
         
-        time = 0
-        minHeap = [[0,k]]
+        minHeap = [[0,k]] # -> [cost, starting node]
         visit = set()
+        res = 0
         
-        #the graph can be disconnected
         while minHeap and len(visit) < n:
-            cost, i = heapq.heappop(minHeap)
-            if i in visit:
+            time, dest = heapq.heappop(minHeap)
+            if dest in visit:
                 continue
             
-            visit.add(i)
-            time = max(time, cost)
+            visit.add(dest)
+            res = max(res, time)
             
-            for neiCost, j in graph[i]:
-                if j not in visit:
-                    heapq.heappush(minHeap,[cost + neiCost, j])
+            for neiTime, dst in graph[dest]:
+                if dst not in visit:
+                    heapq.heappush(minHeap,[neiTime + time, dst])
         
-        return time if len(visit) == n else -1
+        return res if len(visit) == n else -1
