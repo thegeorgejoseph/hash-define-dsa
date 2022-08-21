@@ -6,18 +6,21 @@ class Solution:
         
         def dfs(r,c):
             res = 0
-            if (r < 0 or c < 0 or r == ROWS or c == COLS or grid[r][c] == 0 or (r,c) in visit):
+            if (r < 0 or r == ROWS or c < 0 or c == COLS or (r,c) in visit or grid[r][c] != 1):
                 return 0
+            
             visit.add((r,c))
-            directions = [[1,0], [0,1], [-1,0], [0,-1]]
+            directions = [[1,0],[0,1],[-1,0],[0,-1]]
             for dr, dc in directions:
-                res += dfs(r +dr, c + dc)
-            return 1 + res
+                row, col = r + dr, c + dc
+                res += dfs(row, col)
             
+            return res + 1
             
+        
         for r in range(ROWS):
             for c in range(COLS):
-                if grid[r][c] == 1 and (r,c) not in visit:
+                if (r,c) not in visit and grid[r][c] == 1:
                     res = max(res, dfs(r,c))
-                    
+        
         return res
