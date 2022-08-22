@@ -1,27 +1,31 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        dependencyMap = {i: [] for i in range(numCourses)}
-        visited, cycle = set(), set()
+        graph = {i: [] for i in range(numCourses)}
         res = []
-        for crs, dep in prerequisites:
-            dependencyMap[crs].append(dep)
-            
+        visit, cycle = set(), set()
+        
+        for crs, pre in prerequisites:
+            graph[crs].append(pre)
+        
+        
         def backtrack(course):
-            if course in cycle: return False
-            if course in visited: return True
+            if course in cycle:
+                return False
+            if course in visit:
+                return True
             
-            visited.add(course)
             cycle.add(course)
-            
-            for dep in dependencyMap[course]:
-                if not backtrack(dep): return False
+            visit.add(course)
+            for pre in graph[course]:
+                if not backtrack(pre): return False
             
             cycle.remove(course)
             res.append(course)
-            dependencyMap[course] = []
+            graph[course] = []
             return True
-            
-        for course, _ in dependencyMap.items():
-            if not backtrack(course): return []
+        
+        
+        for crs, pre in graph.items():
+            if not backtrack(crs): return []
         
         return res
