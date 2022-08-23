@@ -1,24 +1,26 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = {i : [] for i in range(numCourses)}
+        cache = {i: [] for i in range(numCourses)}
         cycle = set()
         for crs, pre in prerequisites:
-            graph[crs].append(pre)
+            cache[crs].append(pre)
         
-        def backtrack(course):
-            if course in cycle: return False
-            if not graph[course]: return True
+        def dfs(course):
+            if course in cycle:
+                return False
+            if not cache[course]:
+                return True
             
             cycle.add(course)
-            for pre in graph[course]:
-                if not backtrack(pre): return False
+            for pre in cache[course]:
+                if not dfs(pre): return False
             
             cycle.remove(course)
-            graph[course] = []
+            cache[course] = []
             return True
-            
         
-        for course, pre in graph.items():
-            if not backtrack(course): return False
+        
+        for course, pre in prerequisites:
+            if not dfs(course): return False
         
         return True
