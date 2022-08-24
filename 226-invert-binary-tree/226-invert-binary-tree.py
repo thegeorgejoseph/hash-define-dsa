@@ -11,10 +11,12 @@ class Solution:
             if not node:
                 return None
             
+            node.left, node.right = node.right, node.left
+            
             dfs(node.left)
             dfs(node.right)
             
-            node.left, node.right = node.right, node.left
+            
             
         dfs(root)
         return root
