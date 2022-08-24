@@ -7,7 +7,7 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        stack = collections.deque([root])
+        stack = deque([root])
         while stack:
             top = stack.pop()
             if p.val < top.val and q.val < top.val:
@@ -16,4 +16,5 @@ class Solution:
                 stack.append(top.right)
             else:
                 return top
+        
         
