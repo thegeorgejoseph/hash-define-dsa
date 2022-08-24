@@ -2,13 +2,14 @@ class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         if endWord not in wordList:
             return 0
-        wordList.append(beginWord)
         
+        wordList.append(beginWord)
         graph = defaultdict(list)
         for word in wordList:
-            for j in range(len(word)):
-                pattern = word[:j] + "*" + word[j + 1:]
+            for i in range(len(word)):
+                pattern = word[:i] + "*" + word[i + 1:]
                 graph[pattern].append(word)
+                
         
         queue = deque([beginWord])
         visit = set([beginWord])
@@ -26,5 +27,4 @@ class Solution:
                             visit.add(nei)
                             queue.append(nei)
             res += 1
-        
         return 0
