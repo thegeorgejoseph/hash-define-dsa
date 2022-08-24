@@ -11,13 +11,14 @@ class Solution:
             if not node:
                 return 0
             
-            left = dfs(node.left,max(maxSoFar, node.val))
+            left  = dfs(node.left, max(maxSoFar, node.val))
             right = dfs(node.right, max(maxSoFar, node.val))
             
-            if node.val >= maxSoFar:
+            if maxSoFar > node.val:
+                return left + right
+            else:
                 return left + right + 1
-            elif node.val < maxSoFar:
-                return left + right 
+            
         
         return dfs(root, root.val)
             
