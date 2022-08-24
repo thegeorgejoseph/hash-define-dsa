@@ -11,10 +11,11 @@ class Solution:
         def dfs(node):
             if not node:
                 return 0
+            
             left = dfs(node.left)
             right = dfs(node.right)
-            left = max(left,0)
-            right = max(right,0)
+            left = max(0, left)
+            right = max(0,right)
             
             res[0] = max(res[0], left + right + node.val)
             
