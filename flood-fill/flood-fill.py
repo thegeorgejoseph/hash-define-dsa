@@ -6,13 +6,12 @@ class Solution:
         def dfs(r,c):
             if (r < 0 or r == ROWS or c < 0 or c == COLS or image[r][c] != initColor or image[r][c] == color):
                 return
-            image[r][c] = color
-            directions = [[0,1],[1,0],[-1,0],[0,-1]]
-            for dr, dc in directions:
-                row, col = r + dr, c + dc
-                dfs(row, col)
             
-            return
+            image[r][c] = color
+            dfs(r + 1,c)
+            dfs(r, c + 1)
+            dfs(r - 1,c)
+            dfs(r,c -1)
         
         dfs(sr,sc)
         return image
