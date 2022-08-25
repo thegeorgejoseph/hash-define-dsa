@@ -1,8 +1,8 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        components = n 
         parent = [i for i in range(n)]
         rank = [1] * n
-        components = n
         
         def find(n):
             p = parent[n]
@@ -11,8 +11,8 @@ class Solution:
                 p = parent[p]
             return p
         
-        def union(v1,v2):
-            p1, p2 = find(v1), find(v2)
+        def union(n1,n2):
+            p1, p2 = find(n1), find(n2)
             
             if p1 == p2:
                 return False
@@ -24,14 +24,11 @@ class Solution:
                 parent[p1] = p2
                 rank[p2] += rank[p1]
             
-            return True
-        
-        
-        for v1, v2 in edges:
-            if not union(v1,v2): 
+            return 1
+        for v1,v2 in edges:
+            if not union(v1,v2):
                 return False
-            else:
+            else: 
                 components -= 1
-            
-        return True if components == 1 else False
         
+        return True if components == 1 else False
