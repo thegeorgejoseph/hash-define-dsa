@@ -1,23 +1,26 @@
 class Solution:
-    def isPalindrome(self, s, l, r):
+    def palindrome(self, s, l, r):
         while l < r:
             if s[l] != s[r]:
                 return False
-            l, r = l + 1, r - 1
+            l += 1
+            r -= 1
         return True
     def partition(self, s: str) -> List[List[str]]:
         res = []
         
-        def backtrack(i, subset):
+        def dfs(i, part):
             if i == len(s):
-                res.append(subset[:])
+                res.append(part[:])
                 return 
             
             for j in range(i, len(s)):
-                if self.isPalindrome(s, i, j):
-                    subset.append(s[i:j + 1])
-                    backtrack(j + 1, subset)
-                    subset.pop()
+                if self.palindrome(s, i, j):
+                    part.append(s[i: j + 1])
+                    dfs(j + 1, part)
+                    part.pop()
             
-        backtrack(0, [])
+            
+        
+        dfs(0, [])
         return res
