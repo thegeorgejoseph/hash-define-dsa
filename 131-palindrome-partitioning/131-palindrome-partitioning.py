@@ -1,10 +1,9 @@
 class Solution:
-    def palindrome(self, s, l, r):
-        while l < r:
-            if s[l] != s[r]:
+    def isPalindrome(self, s, left, right):
+        while left < right:
+            if s[left] != s[right]:
                 return False
-            l += 1
-            r -= 1
+            left, right = left + 1, right - 1
         return True
     def partition(self, s: str) -> List[List[str]]:
         res = []
@@ -15,12 +14,10 @@ class Solution:
                 return 
             
             for j in range(i, len(s)):
-                if self.palindrome(s, i, j):
-                    part.append(s[i: j + 1])
+                if self.isPalindrome(s,i,j):
+                    part.append(s[i : j + 1])
                     dfs(j + 1, part)
                     part.pop()
-            
-            
         
         dfs(0, [])
         return res
