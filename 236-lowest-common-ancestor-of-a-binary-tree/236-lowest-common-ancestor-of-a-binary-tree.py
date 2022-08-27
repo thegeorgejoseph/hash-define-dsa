@@ -23,5 +23,6 @@ class Solution:
             else:
                 return left or right
         
+        
         return dfs(root)
-            
+        
