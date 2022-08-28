@@ -6,6 +6,8 @@ class Solution:
             currentRow = [1] * n
             for j in range(1,n):
                 currentRow[j] = currentRow[j-1] + lastRow[j]
-            lastRow = currentRow
+            lastRow = currentRow[:]
         
         return lastRow[-1]
+            
+        
