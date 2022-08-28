@@ -6,7 +6,7 @@ class Solution:
             if i >= len(prices):
                 return 0
             if (i, canBuy) in cache:
-                return cache[(i, canBuy)]
+                return cache[(i,canBuy)]
             
             if canBuy:
                 buy = dfs(i + 1, not canBuy) - prices[i]
@@ -20,5 +20,5 @@ class Solution:
             cache[(i, canBuy)] = res
             return res
         
-            
+        
         return dfs(0, True)
