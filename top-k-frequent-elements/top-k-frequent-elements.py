@@ -9,7 +9,6 @@ class Solution:
             freqs[count].append(n)
         for i in range(len(freqs)-1,-1,-1):
             for n in freqs[i]:
-                if not freqs[i]: continue
                 res.append(n)
                 if len(res) == k:
                     return res
