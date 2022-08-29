@@ -3,17 +3,16 @@ class Solution:
         counts = Counter(tasks)
         maxHeap = [-c for c in counts.values()]
         heapq.heapify(maxHeap)
-        q = deque()
+        queue = deque()
         time = 0
-        while maxHeap or q:
+        while maxHeap or queue:
             time += 1
             if not maxHeap:
-                time = q[0][1]
+                time = queue[0][1]
             if maxHeap:
-                #there is something inside the maxHeap
                 cnt = 1 + heapq.heappop(maxHeap)
-                if cnt : 
-                    q.append([cnt, time + n])
-            if q and q[0][1] == time:
-                heapq.heappush(maxHeap, q.popleft()[0])
+                if cnt:
+                    queue.append([cnt, time + n])
+            if queue and queue[0][1] == time:
+                heapq.heappush(maxHeap, queue.popleft()[0])
         return time
