@@ -1,22 +1,22 @@
 class DetectSquares:
 
     def __init__(self):
-        self.counter = defaultdict(int)
         self.points = []
+        self.counter = defaultdict(int)
 
     def add(self, point: List[int]) -> None:
         px, py = point
         self.counter[(px,py)] += 1
-        self.points.append((px,py))
+        self.points.append(point)
 
     def count(self, point: List[int]) -> int:
-        res = 0
-        px, py = point
-        for x, y in self.points:
-            if abs(px-x) != abs(py-y) or px == x or py == y:
+        x, y = point
+        count = 0
+        for px, py in self.points:
+            if abs(x- px) != abs(y - py) or px == x or py == y:
                 continue
-            res += self.counter[(px,y)] * self.counter[(x, py)]
-        return res
+            count += self.counter[(px,y)] * self.counter[(x,py)]
+        return count
 
 
 # Your DetectSquares object will be instantiated and called as such:
