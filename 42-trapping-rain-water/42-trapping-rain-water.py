@@ -1,38 +1,17 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        if not height: return 0
-        left, right = 0, len(height) - 1
-        res = 0
-        maxLeftHeight, maxRightHeight = height[left], height[right]
-        
-        while left < right:
-            if maxLeftHeight <= maxRightHeight:
-                left += 1
-                temp = maxLeftHeight - height[left] if maxLeftHeight - height[left] >= 0 else 0
-                maxLeftHeight = max(maxLeftHeight, height[left])
-                res += temp
-            else:
-                right -= 1
-                temp = maxRightHeight - height[right] if maxRightHeight - height[right] >= 0 else 0
-                maxRightHeight = max(maxRightHeight, height[right])
-                res += temp
-        return res
-        
-#         nums= height
-#         prefix = [i for i in height]
-        
-#         for i in range(1,len(height)):
-#             prefix[i] = max(prefix[i-1], nums[i-1])
-        
-#         suffix = [i for i in height]
-        
-#         for i in range(len(height) - 2, -1, -1):
-#             suffix[i] = max(suffix[i+1], nums[i+1])
-        
-#         res = [0] * (len(height) )
-        
-#         for i in range(len(height)):
-#             temp = min(prefix[i], suffix[i]) - nums[i]
-#             res[i] = temp if temp >= 0 else 0
-        
-#         return sum(res)
+        prefix = [0] * (len(height))
+        print(prefix)
+        p = 0
+        for i in range(len(prefix)):
+            prefix[i] = p
+            p = max(p, height[i])
+        suffix = [0] * (len(height))
+        s = 0
+        for i in range(len(height)-1,-1,-1):
+            suffix[i] = s
+            s = max(s, height[i])
+        water = 0
+        for i in range(len(height)):
+            water += max(min(prefix[i], suffix[i]) - height[i],0)
+        return water
