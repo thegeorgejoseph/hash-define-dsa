@@ -1,21 +1,14 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         res = []
-        stack = collections.deque([])
-        
-        def backtrack(openBrackets, closedBrackets):
-            if openBrackets == closedBrackets == n :
-                res.append("".join(stack))
+        def backtrack(openBracket, closedBracket, s):
+            if openBracket == closedBracket == n:
+                res.append(s)
                 return
-            if openBrackets < n:
-                stack.append("(")
-                backtrack(openBrackets + 1, closedBrackets)
-                stack.pop()
-            if closedBrackets < openBrackets:
-                stack.append(")")
-                backtrack(openBrackets, closedBrackets + 1)
-                stack.pop()
+            if openBracket < n:
+                backtrack(openBracket + 1, closedBracket, s + '(')
+            if closedBracket < openBracket:
+                backtrack(openBracket, closedBracket + 1, s + ')')
             
-        
-        backtrack(0,0)
+        backtrack(0,0, "")
         return res
