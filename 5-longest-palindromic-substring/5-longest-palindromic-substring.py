@@ -7,17 +7,13 @@ class Solution:
                 length = r - l + 1
                 if length > longest:
                     longest = length
-                    left = l
-                    right = r
-                l -= 1
-                r += 1
+                    left, right = l, r
+                l, r = l - 1, r + 1
             l, r = i, i + 1
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 length = r - l + 1
                 if length > longest:
                     longest = length
-                    left = l
-                    right = r
-                l -= 1
-                r += 1
-        return s[left:right +1]
+                    left, right = l, r
+                l, r = l - 1, r + 1
+        return s[left: right + 1]
