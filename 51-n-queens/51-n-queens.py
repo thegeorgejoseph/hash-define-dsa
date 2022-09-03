@@ -1,33 +1,25 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        board = [["."] * n for i in range(n)]
+        board = [["." for _ in range(n)] for _ in range(n)]
+        col, pos, neg = set(), set(), set()
         res = []
-        colSet = set()
-        posDiag = set() # (r+c) pattern
-        negDiag = set() # (r-c) pattern
-        
         def backtrack(r):
-            if r == n :
-                temp = ["".join(row) for row in board]
-                res.append(temp[:])
-            
+            if r == n:
+                res.append(["".join(row) for row in board])
             for c in range(n):
-                if c in colSet or r+c in posDiag or r-c in negDiag:
+                if c in col or r + c in pos or r - c in neg:
                     continue
                 
-                colSet.add(c)
-                posDiag.add(r+c)
-                negDiag.add(r-c)
+                
+                col.add(c)
+                pos.add(r+c)
+                neg.add(r-c)
                 board[r][c] = "Q"
-                
-                backtrack(r + 1)
-                
-                colSet.remove(c)
-                posDiag.remove(r+c)
-                negDiag.remove(r-c)
+                backtrack(r+1)
+                col.remove(c)
+                pos.remove(r+c)
+                neg.remove(r-c)
                 board[r][c] = "."
-        
-            
+                
         backtrack(0)
         return res
-                
