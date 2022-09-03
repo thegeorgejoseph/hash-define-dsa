@@ -1,19 +1,19 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        stack = collections.deque([])
+        stack = []
         for token in tokens:
-            if token == "+":
-                b, a = int(stack.pop()), int(stack.pop())
-                stack.append(str(a + b))
-            elif token == "-":
-                b, a = int(stack.pop()), int(stack.pop())
-                stack.append(str(a - b))
-            elif token == "*":
-                b, a = int(stack.pop()), int(stack.pop())
-                stack.append(str(a * b))
-            elif token == "/":
-                b, a = int(stack.pop()), int(stack.pop())
-                stack.append(int(a / b))
+            if token in "+-/*":
+                two = int(stack.pop())
+                one = int(stack.pop())
+                if token == "+":
+                    stack.append(one + two)
+                elif token ==  "-":
+                    stack.append(one - two)
+                elif token ==  "*":
+                    stack.append(one * two)
+                elif token ==  "/":
+                    stack.append(int(one / two))
             else:
                 stack.append(token)
-        return int(stack.pop())
+        return stack[-1]
+                    
