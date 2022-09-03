@@ -1,18 +1,19 @@
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
         counts = Counter(tasks)
-        maxHeap = [-c for c in counts.values()]
-        heapq.heapify(maxHeap)
+        maxheap = [-c for c in counts.values()]
+        heapq.heapify(maxheap)
         queue = deque()
         time = 0
-        while maxHeap or queue:
+        while maxheap or queue:
             time += 1
-            if not maxHeap:
+            if not maxheap:
                 time = queue[0][1]
-            if maxHeap:
-                cnt = 1 + heapq.heappop(maxHeap)
-                if cnt:
-                    queue.append([cnt, time + n])
-            if queue and queue[0][1] == time:
-                heapq.heappush(maxHeap, queue.popleft()[0])
+            if maxheap:
+                count = 1 + heapq.heappop(maxheap)
+                if count:
+                    queue.append([count, time + n])
+            if queue and time == queue[0][1]:
+                cnt = queue.popleft()[0]
+                heapq.heappush(maxheap, cnt)
         return time
