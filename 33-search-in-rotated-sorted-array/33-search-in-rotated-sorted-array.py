@@ -3,7 +3,7 @@ class Solution:
         left, right = 0, len(nums) - 1
         while left <= right:
             mid = left + ((right - left) // 2)
-            if target == nums[mid]:
+            if nums[mid] == target:
                 return mid
             if nums[left] <= nums[mid]:
                 if target < nums[left] or target > nums[mid]:
@@ -16,7 +16,3 @@ class Solution:
                 else:
                     left = mid + 1
         return -1
-    
-    # [1,2,3,4,5,6,7]
-    # [5,6,7,1,2,3,4]
-    # [5,6,7,1] -> what does it take to check the other half of this array
