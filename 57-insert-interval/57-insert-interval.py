@@ -4,6 +4,7 @@ class Solution:
         # condition to place the new interval before the rest of the array
         # condition to place the new interval after the rest of the array
         # condition to place the new interval as a merged array
+        
         res = []
         for i in range(len(intervals)):
             currentInterval = intervals[i]
@@ -13,8 +14,7 @@ class Solution:
             elif newInterval[0] > currentInterval[1]:
                 res.append(currentInterval)
             else:
-                newInterval = [min(newInterval[0], currentInterval[0]),max(newInterval[1], currentInterval[1])]
+                newInterval = [min(currentInterval[0], newInterval[0]),max(currentInterval[1], newInterval[1])]
+        
         res.append(newInterval)
         return res
-    
-    
