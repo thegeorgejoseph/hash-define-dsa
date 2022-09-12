@@ -10,17 +10,16 @@ class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node:
             return None
-        
-        hashmap = {}
+        copy = {}
         
         def dfs(node):
-            if node in hashmap:
-                return hashmap[node]
+            if not node or node in copy:
+                return 
             
-            hashmap[node] = Node(node.val)
-            for n in node.neighbors:
-                hashmap[node].neighbors.append(dfs(n))
-            
-            return hashmap[node]
+            copy[node] = Node(node.val,None)
+            for nei in node.neighbors:
+                dfs(nei)
+                copy[node].neighbors.append(copy[nei])
         
-        return dfs(node)
+        dfs(node)
+        return copy[node]
