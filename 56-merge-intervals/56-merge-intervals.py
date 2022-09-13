@@ -4,12 +4,12 @@ class Solution:
         res = [intervals[0]]
         
         for i in range(1, len(intervals)):
+            currentInterval = res[-1]
             newInterval = intervals[i]
-            previousInterval = res[-1]
-            
-            if newInterval[0] > previousInterval[1]:
+            if newInterval[0] > currentInterval[1]:
                 res.append(newInterval)
             else:
-                previousInterval = [min(previousInterval[0],newInterval[0]), max(previousInterval[1], newInterval[1])]
-                res[-1] = previousInterval
+                res.pop()
+                newInterval = [min(currentInterval[0], newInterval[0]), max(currentInterval[1], newInterval[1])]
+                res.append(newInterval)
         return res
