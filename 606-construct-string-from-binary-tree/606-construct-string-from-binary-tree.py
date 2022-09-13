@@ -8,18 +8,17 @@ class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
         res = []
         
-        def preorder(node):
+        def dfs(node):
             if not node:
                 return 
             
             res.append("(")
             res.append(node.val)
-            
             if not node.left and node.right:
                 res.append("()")
-            preorder(node.left)
-            preorder(node.right)
+            dfs(node.left)
+            dfs(node.right)
             res.append(")")
         
-        preorder(root)
-        return "".join(map(str, res[1:-1]))
+        dfs(root)
+        return "".join(map(str,res[1:-1]))
