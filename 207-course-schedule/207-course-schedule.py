@@ -1,24 +1,23 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        preMap = {i : [] for i in range(numCourses)}
-        for crs, pre in prerequisites:
-            preMap[crs].append(pre)
-        cycle = set()
-        
+        graph = {i : [] for i in range(numCourses)}
+        for course, pre in prerequisites:
+            graph[course].append(pre)
+        visit = set()
         def dfs(course):
-            if course in cycle:
+            if course in visit:
                 return False
-            if not preMap[course]:
+            if not graph[course]:
                 return True
-            cycle.add(course)
-            for pre in preMap[course]:
+            visit.add(course)
+            for pre in graph[course]:
                 if not dfs(pre): return False
-            preMap[course] = []
-            cycle.remove(course)
+            visit.remove(course)
+            graph[course] = []
             return True
-              
-        for course, pre in preMap.items():
-            if not dfs(course):
-                return False
+
+        
+        for course, pre in graph.items():
+            if not dfs(course): return False
         
         return True
