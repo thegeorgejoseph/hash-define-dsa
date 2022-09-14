@@ -4,42 +4,28 @@ class Solution:
         for num in nums:
             Counter[num] = 1 + Counter.get(num, 0)
         
-        maxHeap = [(-value, key) for key, value in Counter.items()]
-        heapq.heapify(maxHeap)
+        temp = [[] for i in range(len(nums)+1)]
+        for key, value in Counter.items():
+            temp[value].append(key)
         res = []
-        while maxHeap:
-            value, ele = heapq.heappop(maxHeap)
-            res.append(ele)
-            if len(res) == k:
-                break
-        return res
-        
+        for i in range(len(temp)-1,-1,-1):
+            if not temp[i]:
+                continue
+            for n in temp[i]:
+                res.append(n)
+                if len(res) == k:
+                    return res
         
 #         Counter = {}
-#         res = []
 #         for num in nums:
-#             Counter[num] = Counter.get(num, 0) + 1
+#             Counter[num] = 1 + Counter.get(num, 0)
         
-#         maxHeap = []
-#         for key, value in Counter.items():
-#             heapq.heappush(maxHeap, (-value, key))
-        
+#         maxHeap = [(-value, key) for key, value in Counter.items()]
+#         heapq.heapify(maxHeap)
+#         res = []
 #         while maxHeap:
-#             value, key = heapq.heappop(maxHeap)
-#             res.append(key)
+#             value, ele = heapq.heappop(maxHeap)
+#             res.append(ele)
 #             if len(res) == k:
-#                 return res
+#                 break
 #         return res
-        
-        # Counter = {}
-        # res = []
-        # for n in nums:
-        #     Counter[n] = 1 + Counter.get(n, 0)
-        # freqs = [[] for i in range(len(nums) +1)]
-        # for n, count in Counter.items():
-        #     freqs[count].append(n)
-        # for i in range(len(freqs)-1,-1,-1):
-        #     for n in freqs[i]:
-        #         res.append(n)
-        #         if len(res) == k:
-        #             return res
