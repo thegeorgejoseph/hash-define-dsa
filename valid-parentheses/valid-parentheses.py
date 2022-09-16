@@ -1,16 +1,17 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        cache = { ")": "(", "}":"{","]":"["}
-        open_set = set(["(","[","{"])
-        stack = deque()
-        for char in s:
-            if char in open_set:
-                stack.append(char)
+        cache = {")":"(", "]":"[","}":"{"}
+        stack = []
+        openbracks = set(["(","[","{"])
+        for bracket in s:
+            if bracket in openbracks:
+                stack.append(bracket)
             else:
                 if len(stack) == 0:
                     return False
-                if cache[char] == stack[-1]:
-                    stack.pop()
-                else:
+                elif stack[-1] != cache[bracket]:
                     return False
+                else:
+                    stack.pop()
         return True if len(stack) == 0 else False
+            
