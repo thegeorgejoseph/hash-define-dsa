@@ -7,6 +7,6 @@ class Solution:
             num1 = int(n1[i]) if i < len(n1) else 0
             num2 = int(n2[i]) if i < len(n2) else 0
             if num1 != num2:
-                return 1 if num1 > num2 else -1
-        
+                if num1 < num2: return -1
+                else: return 1
         return 0
