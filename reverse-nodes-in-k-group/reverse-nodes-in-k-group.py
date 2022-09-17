@@ -6,28 +6,27 @@
 class Solution:
     def getKthNode(self, curr, k):
         while curr and k > 0:
-            curr = curr.next
             k -= 1
+            curr = curr.next
         return curr
     
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         dummy = ListNode(0, head)
-        currentPrev = dummy
+        currPrev = dummy
         
         while True:
-            kth = self.getKthNode(currentPrev, k)
-            if not kth:
+            kthNode = self.getKthNode(currPrev, k)
+            if not kthNode:
                 break
-            currentNext = kth.next
-            prev = currentNext
-            curr = currentPrev.next
-            while curr != currentNext:
+            currNext = kthNode.next
+            curr = currPrev.next
+            prev = currNext
+            while curr != currNext:
                 temp = curr.next
                 curr.next = prev
                 prev = curr
                 curr = temp
-            
-            temp = currentPrev.next
-            currentPrev.next = kth
-            currentPrev = temp
+            temp = currPrev.next
+            currPrev.next = kthNode
+            currPrev = temp
         return dummy.next
