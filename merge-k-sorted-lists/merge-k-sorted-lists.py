@@ -4,10 +4,10 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, l1, l2):
+    def mergeTwoLists(self, list1, list2):
         dummy = ListNode(0)
         curr = dummy
-        h1, h2 = l1, l2
+        h1, h2 = list1, list2
         while h1 and h2:
             if h1.val <= h2.val:
                 temp = h1.next
@@ -23,15 +23,16 @@ class Solution:
         if h2:
             curr.next = h2
         return dummy.next
-
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        if not lists:
-            return None
+        if not lists: return None
         while len(lists) > 1:
             temp = []
-            for i in range(0, len(lists),2):
-                list1 = lists[i]
-                list2 = lists[i + 1] if i + 1 < len(lists) else None
-                temp.append(self.mergeTwoLists(list1,list2))
+            for i in range(0,len(lists),2):
+                l1 = lists[i]
+                l2 = lists[i + 1]  if i + 1 < len(lists) else None
+                temp.append(self.mergeTwoLists(l1,l2))
             lists = temp[:]
         return lists[0]
+    
+    
+    
