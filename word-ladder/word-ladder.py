@@ -6,25 +6,23 @@ class Solution:
         wordList.append(beginWord)
         graph = defaultdict(list)
         for word in wordList:
-            for i in range(len(word)):
-                pattern = word[:i] + "*" + word[i + 1:]
+            for j in range(len(word)):
+                pattern = word[:j] + "*" + word[j + 1:]
                 graph[pattern].append(word)
-                
-        
         queue = deque([beginWord])
         visit = set([beginWord])
-        res = 1
-        
+        seq = 1
         while queue:
-            for i in range(len(queue)):
+            for i in range(len(queue)):              
                 word = queue.popleft()
                 if word == endWord:
-                    return res
+                    return seq
                 for j in range(len(word)):
                     pattern = word[:j] + "*" + word[j + 1:]
                     for nei in graph[pattern]:
                         if nei not in visit:
                             visit.add(nei)
                             queue.append(nei)
-            res += 1
+            seq += 1
+        
         return 0
