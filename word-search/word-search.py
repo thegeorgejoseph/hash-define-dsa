@@ -8,18 +8,17 @@ class Solution:
                 return True
             if (r < 0 or r == ROWS or c < 0 or c == COLS or (r,c) in visit or board[r][c] != word[i]):
                 return False
-            
             visit.add((r,c))
             for dr, dc in directions:
                 row, col = r + dr, c + dc
-                if dfs(row,col,i+1): return True
-            
+                if dfs(row, col, i + 1): return True
             visit.remove((r,c))
             return False
-                
         
+        i = 0
         for r in range(ROWS):
             for c in range(COLS):
-                if dfs(r,c,0): return True
-        
+                if board[r][c] == word[i]:
+                    if dfs(r,c,i): return True
         return False
+        
