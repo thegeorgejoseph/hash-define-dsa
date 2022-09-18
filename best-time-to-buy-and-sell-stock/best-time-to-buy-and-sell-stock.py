@@ -8,15 +8,14 @@ class Solution:
 # O(n) time and O(1) space
         if len(prices) == 1:
             return 0
-        if len(prices) == 2 and prices[1] < prices[0]:
-            return 0
-        maxProfit = 0
         left, right = 0, 1
+        res = 0
         while right < len(prices):
             profit = prices[right] - prices[left]
             if profit < 0:
-                left, right = right, right + 1
-                continue
-            maxProfit = max(maxProfit, profit)
-            right += 1
-        return maxProfit
+                left = right
+                right = left + 1
+            else:
+                res = max(res, profit)
+                right += 1
+        return res
