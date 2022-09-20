@@ -1,16 +1,18 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
-        counter = {}
-        for i,c in enumerate(s):
-            counter[c] = i
-        res = []
-        maxRight = counter[s[0]]
-        left = 0
-        for i in range(1,len(s)):
-            if i > maxRight:
-                res.append(maxRight - left + 1)
-                left = i 
-            maxRight = max(maxRight, counter[s[i]])
+        cache = {}
+        for i, char in enumerate(s):
+            cache[char] = i
         
-        res.append(maxRight - left + 1)
+        maxIdx = cache[s[0]]
+        res = []
+        left = 0
+        for i in range(1, len(s)):
+            if i > maxIdx:
+                res.append(maxIdx - left + 1)
+                left = i
+            maxIdx = max(maxIdx, cache[s[i]])
+        res.append(maxIdx - left + 1)
         return res
+            
+                
