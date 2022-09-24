@@ -1,14 +1,18 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         res = []
-        def backtrack(openBracket, closedBracket, s):
+        
+        def dfs(openBracket, closedBracket, bracket):
             if openBracket == closedBracket == n:
-                res.append(s)
-                return
-            if openBracket < n:
-                backtrack(openBracket + 1, closedBracket, s + '(')
-            if closedBracket < openBracket:
-                backtrack(openBracket, closedBracket + 1, s + ')')
+                res.append(bracket)
+                return 
             
-        backtrack(0,0, "")
+            if openBracket < n:
+                dfs(openBracket + 1, closedBracket, bracket + "(")
+            if closedBracket < openBracket:
+                dfs(openBracket, closedBracket + 1, bracket + ")")
+            
+        
+        
+        dfs(0, 0, "")
         return res
