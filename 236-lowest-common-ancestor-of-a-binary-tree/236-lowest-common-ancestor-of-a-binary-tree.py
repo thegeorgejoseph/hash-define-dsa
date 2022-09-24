@@ -20,9 +20,8 @@ class Solution:
             
             if left and right:
                 return node
-            else:
-                return left or right
-        
+            
+            return left or right
         
         return dfs(root)
         
