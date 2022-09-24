@@ -1,16 +1,16 @@
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        res, count = 0, 0
-        start = sorted([i[0] for i in intervals])
-        end = sorted([i[1] for i in intervals])
+        starts = sorted([interval[0] for interval in intervals])
+        ends = sorted([interval[1] for interval in intervals])
+        rooms, res = 0, 0
         i, j = 0, 0
-        while i < len(start) and j < len(end):
-            if start[i] < end[j]:
-                count += 1
+        while i < len(starts) and j < len(ends):
+            if starts[i] < ends[j]:
+                rooms += 1
                 i += 1
             else:
-                count -= 1
+                rooms -= 1
                 j += 1
-            res = max(res, count)
+            res = max(res, rooms)
         return res
-        
+            
