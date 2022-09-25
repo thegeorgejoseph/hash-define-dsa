@@ -6,15 +6,15 @@ class Solution:
 # if rightVal - leftVal = -ve then update right and left pointers - right goes to where left was
 # if rightVal - leftVal = +ve then update right pointer and max_profit
 # O(n) time and O(1) space
-        if len(prices) == 1:
-            return 0
-        left, right = 0, 1
+        left = 0
+        right = 1
         res = 0
         while right < len(prices):
-            if prices[left] > prices[right]:
+            profit = prices[right] - prices[left]
+            if profit < 0:
                 left = right
                 right = left + 1
-                continue
-            res = max(res, prices[right] - prices[left])
-            right += 1
+            else:
+                res = max(res, profit)
+                right += 1
         return res
