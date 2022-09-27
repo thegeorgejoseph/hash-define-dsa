@@ -1,20 +1,19 @@
 class Solution:
-#     create test cases before starting to code
-# valid case : [], [()]
-# invalid case: ][, [), [, ]
     def isValid(self, s: str) -> bool:
-        hashmap = {"}": "{", "]" : "[", ")" : "(" } 
-        stack = collections.deque()
+        stack = []
+        brackets = {")": "(", "]": "[", "}": "{"}
+        avail = set(["(","[", "{"])
         
-        for par in s:
-            if len(stack) == 0 and par in hashmap:
-                return False
-            
-            if par in hashmap:
-                top = stack.pop()
-                if top != hashmap[par]:
-                    return False
+        for char in s:
+            if char in avail:
+                stack.append(char)
             else:
-                stack.append(par)
+                if len(stack) == 0:
+                    return False
+                if brackets[char] == stack[-1]:
+                    stack.pop()
+                else:
+                    return False
         
         return True if len(stack) == 0 else False
+                
