@@ -5,60 +5,23 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        h1, h2 = l1, l2
+        dummy = ListNode(0)
+        curr = dummy
         carry = 0
-        headOne, headTwo = l1, l2
-        dummy = ListNode(0, None)
-        current = dummy
-        while headOne or headTwo:
-            res = carry
-            if headOne:
-                res += headOne.val
-                headOne = headOne.next
-            if headTwo:
-                res += headTwo.val
-                headTwo = headTwo.next
-                
-            if res < 10:
-                current.next = ListNode(res, None)
-                carry = 0
-            else:
-                carry = res // 10
-                current.next = ListNode(res % 10, None)
-            
-            current = current.next
-        
-        if carry > 0:
-            current.next = ListNode(carry, None)
+        while h1 or h2:
+            if h1:
+                carry += h1.val
+                h1 = h1.next
+            if h2:
+                carry += h2.val
+                h2 = h2.next
+            value = carry % 10
+            carry = carry // 10
+            curr.next = ListNode(value)
+            curr = curr.next
+        if carry:
+            curr.next = ListNode(carry)
         
         return dummy.next
-        
-        
-        
-        
-#         carry = 0
-#         first, second = l1, l2
-#         dummy = ListNode()
-#         curr = dummy
-#         while first or second:
-#             res = carry
-#             if first:
-#                 res += first.val
-#                 first = first.next
-#             if second:
-#                 res += second.val
-#                 second = second.next
-                
-#             if res < 10:
-#                 carry = 0
-#             else:
-#                 carry = res // 10
-#                 res = res % 10
             
-#             curr.next = ListNode(res)
-#             curr = curr.next
-        
-#         if carry > 0:
-#             curr.next = ListNode(carry)
-        
-#         return dummy.next
-        
