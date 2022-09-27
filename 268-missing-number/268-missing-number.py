@@ -1,6 +1,7 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        hashset = set(nums)
-        for i in range(len(nums) + 1):
-            if i not in hashset:
-                return i
+        cache = set(nums)
+        for n in range(0, len(nums) + 1):
+            if n not in cache:
+                return n
+        
