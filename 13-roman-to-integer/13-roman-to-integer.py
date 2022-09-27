@@ -17,8 +17,7 @@ class Solution:
             "CD": 400,
             "CM": 900
         }
-        res = 0
-        i = 0
+        res, i = 0, 0
         while i < len(s):
             if i + 1 < len(s) and s[i:i+2] in special:
                 res += special[s[i:i+2]]
