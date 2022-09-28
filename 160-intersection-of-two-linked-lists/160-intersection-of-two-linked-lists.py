@@ -6,16 +6,21 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        cache = set()
-        h1 = headA
-        while h1:
-            if h1 in cache:
-                break
-            cache.add(h1)
-            h1 = h1.next
-        h2 = headB
-        while h2:
-            if h2 in cache:
-                return h2
-            h2 = h2.next
-        return None
+        h1, h2 = headA, headB
+        while h1 != h2:
+            h1 = h1.next if h1 else headB
+            h2 = h2.next if h2 else headA
+        return h1
+        # cache = set()
+        # h1 = headA
+        # while h1:
+        #     if h1 in cache:
+        #         break
+        #     cache.add(h1)
+        #     h1 = h1.next
+        # h2 = headB
+        # while h2:
+        #     if h2 in cache:
+        #         return h2
+        #     h2 = h2.next
+        # return None
