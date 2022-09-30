@@ -8,19 +8,21 @@ class Solution:
     def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return None
-        cache = defaultdict(list) # x-values: node.val
+        cache = defaultdict(list)
         queue = deque([(0,root)])
+        
         while queue:
-            x, node = queue.popleft()
-            cache[x].append(node.val)
-            if node.left:
-                queue.append((x-1,node.left))
-            if node.right:
-                queue.append((x + 1, node.right))
-        min_x = min(cache.keys())
-        max_x = max(cache.keys())
+            for i in range(len(queue)):
+                x, top = queue.popleft()
+                cache[x].append(top.val)
+                if top.left:
+                    queue.append((x - 1, top. left))
+                if top.right:
+                    queue.append((x + 1, top.right))
+            
+                
+        min_x, max_x = min(cache.keys()), max(cache.keys())
         res = []
-        for i in range(min_x, max_x + 1):
-            if cache[i]:
-                res.append(cache[i])
+        for x in range(min_x, max_x + 1):
+            if cache[x]: res.append(cache[x])
         return res
