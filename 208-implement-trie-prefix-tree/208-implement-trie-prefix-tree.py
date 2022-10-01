@@ -2,7 +2,6 @@ class TrieNode:
     def __init__(self):
         self.children = {}
         self.isEnd = False
-        
 class Trie:
 
     def __init__(self):
@@ -27,7 +26,8 @@ class Trie:
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
         for char in prefix:
-            if char not in curr.children: return False
+            if char not in curr.children:
+                return False
             curr = curr.children[char]
         return True
 
