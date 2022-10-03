@@ -1,8 +1,8 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
         ROWS, COLS = len(grid), len(grid[0])
-        fresh, rotten, time = 0, 0, 0
         queue = deque()
+        fresh, time = 0, 0
         directions = [[1,0],[0,1],[-1,0],[0,-1]]
         for r in range(ROWS):
             for c in range(COLS):
@@ -12,7 +12,7 @@ class Solution:
                     queue.append((r,c))
         
         while queue and fresh > 0:
-            for i in range(len(queue)):
+            for _ in range(len(queue)):
                 r, c = queue.popleft()
                 for dr, dc in directions:
                     row, col = r + dr, c + dc
@@ -22,6 +22,4 @@ class Solution:
                     grid[row][col] = 2
                     queue.append((row, col))
             time += 1
-            
         return time if fresh == 0 else -1
-            
