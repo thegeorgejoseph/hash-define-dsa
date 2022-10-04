@@ -18,8 +18,6 @@ class Solution:
             right = dfs(node.right, sumSoFar)
             if left is True or right is True:
                 return True
-            if left is False and right is False:
-                return False
             if left is None and right is None:
                 return sumSoFar == targetSum
             
