@@ -6,11 +6,22 @@ class Solution:
             n = n // 10
         return _sum
     def isHappy(self, n: int) -> bool:
-        visit = set()
-        while n != 1:
-            if n in visit:
+        slow, fast = n, n
+        while True:
+            slow, fast = self.sumOfDigits(slow), self.sumOfDigits(self.sumOfDigits(fast))
+            if fast == 1:
+                break
+            if slow == fast:
                 return False
-            visit.add(n)
-            n = self.sumOfDigits(n)
+        return fast == 1
+        
             
-        return True
+#     def isHappy(self, n: int) -> bool:
+#         visit = set()
+#         while n != 1:
+#             if n in visit:
+#                 return False
+#             visit.add(n)
+#             n = self.sumOfDigits(n)
+            
+#         return True
