@@ -1,12 +1,13 @@
-[2,3,1,1,4]
-[2, 3, 0, 1, 4]
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        dp = [float('inf')]*(len(nums))
-        dp[-1] = 0
-        for i in range(len(nums)-2,-1,-1):
-            jump = nums[i]
-            for j in range(jump+1):
-                if i + j < len(nums):
-                    dp[i] = min(dp[i], 1 + dp[i + j])
-        return dp[0]
+        l, r = 0, 0
+        seq = 0
+        farthest = 0
+        while r < len(nums) - 1:
+            for i in range(l, r + 1):
+                farthest = max(farthest, i + nums[i])
+            l = r + 1
+            r = farthest
+            seq += 1
+        return seq
+                    
