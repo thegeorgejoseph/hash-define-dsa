@@ -10,10 +10,10 @@ class Solution:
         prev = dummy
         while fast and fast.next:
             prev = slow
-            slow = slow.next 
+            slow = slow.next
             fast = fast.next.next
-        h2 = slow.next
+        NXT = slow.next
         slow.next = None
-        prev.next = h2
+        prev.next = NXT
         return dummy.next 
         
