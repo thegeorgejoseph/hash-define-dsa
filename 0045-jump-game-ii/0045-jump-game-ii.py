@@ -1,8 +1,6 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        l, r = 0, 0
-        seq = 0
-        farthest = 0
+        l, r, seq, farthest = 0, 0, 0, 0
         while r < len(nums) - 1:
             for i in range(l, r + 1):
                 farthest = max(farthest, i + nums[i])
@@ -10,4 +8,3 @@ class Solution:
             r = farthest
             seq += 1
         return seq
-                    
