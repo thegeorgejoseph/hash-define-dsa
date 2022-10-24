@@ -10,16 +10,12 @@ class Solution:
         self.res = None
         def dfs(node):
             if not node:
-                return 
-            
+                return     
             dfs(node.left)
             self.count += 1
             if self.count == k:
                 self.res = node.val
-            if self.res is not None:
                 return 
             dfs(node.right)          
-            if self.res is not None:
-                return 
         dfs(root)
         return self.res
