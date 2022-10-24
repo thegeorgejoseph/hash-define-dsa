@@ -22,11 +22,3 @@ class Solution:
             return True
         
         return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
-        
-        
-        
-        
-        
-        
-        
-        
