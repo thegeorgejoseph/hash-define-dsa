@@ -1,7 +1,7 @@
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        stack = []
         res = 0
+        stack = []
         for i, h in enumerate(heights):
             currentIdx = i
             while stack and h < stack[-1][1]:
