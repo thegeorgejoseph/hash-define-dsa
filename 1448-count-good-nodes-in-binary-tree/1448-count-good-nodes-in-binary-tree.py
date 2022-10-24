@@ -6,20 +6,15 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        
-        def dfs(node, maxSoFar):
+        self.res = 0
+        def dfs(node, prevNode):
             if not node:
                 return 0
+            left = dfs(node.left, max(prevNode, node.val))
+            right = dfs(node.right, max(prevNode, node.val))
             
-            left = dfs(node.left, max(maxSoFar, node.val))
-            right = dfs(node.right, max(maxSoFar, node.val))
-            
-            if maxSoFar > node.val:
-                return left + right
-            else:
-                return left + right + 1
-            
-        return dfs(root, root.val)
-        
-        
-        
+            if prevNode <= node.val:
+                self.res += 1
+
+        dfs(root, root.val)
+        return self.res
