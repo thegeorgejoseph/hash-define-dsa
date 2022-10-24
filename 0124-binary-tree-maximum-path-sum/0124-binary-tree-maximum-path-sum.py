@@ -15,8 +15,10 @@ class Solution:
             right = dfs(node.right)
             if left < 0: left = 0
             if right < 0: right = 0
-            self.res = max(self.res, node.val + left + right)
-            return node.val + max(left, right)
-        
+            
+            self.res = max(self.res, node.val + left + right)     
+            return max(left, right) + node.val
+            
+            
         dfs(root)
         return self.res
