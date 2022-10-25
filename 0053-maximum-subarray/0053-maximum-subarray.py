@@ -1,6 +1,7 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        res, prefix = float('-inf'), 0
+        prefix = 0
+        res = float('-inf')
         for num in nums:
             if prefix < 0:
                 prefix = 0
