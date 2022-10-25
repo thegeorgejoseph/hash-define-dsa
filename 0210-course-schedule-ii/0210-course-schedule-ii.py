@@ -1,6 +1,6 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        graph = {i : [] for i in range(numCourses)}
+        graph = {i: [] for i in range(numCourses)}
         for crs, pre in prerequisites:
             graph[crs].append(pre)
         res = []
@@ -19,8 +19,10 @@ class Solution:
             res.append(course)
             return True
         
+        for crs, _ in graph.items():
+            if not dfs(crs): 
+                return []
         
-        for crs, deps in graph.items():
-            if not dfs(crs): return []
+        return res if len(res) == numCourses else []
         
-        return res
+        
