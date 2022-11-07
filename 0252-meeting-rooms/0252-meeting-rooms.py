@@ -1,13 +1,10 @@
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-        if not intervals:
-            return True
-        intervals.sort()
-        currentInterval = intervals[0]
-        for i in range(1, len(intervals)):
-            newInterval = intervals[i]
-            if newInterval[0] >= currentInterval[1]:
-                currentInterval = [min(currentInterval[0], newInterval[0]), max(currentInterval[1], newInterval[1])]
-            else:
+        if not intervals: return True
+        intervals.sort(key = lambda x: x[0])
+        curInterval = intervals[0]
+        for i, newInterval in enumerate(intervals[1:]):
+            if newInterval[0] < curInterval[1]:
                 return False
+            curInterval = newInterval[:]
         return True
