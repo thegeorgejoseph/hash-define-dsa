@@ -1,16 +1,16 @@
 class SegmentTree:
     
-    def __init__(self, total, L, R):
+    def __init__(self, total, L, R) :
         self.sum = total
         self.L, self.R = L, R
         self.left, self.right = None, None
-        
+    
     @staticmethod
     def build(nums, L, R):
-        if L == R:
+        if (L == R):
             return SegmentTree(nums[L], L, R)
         
-        M = (L + R ) // 2
+        M = (L + R) // 2
         root = SegmentTree(0, L, R)
         root.left = SegmentTree.build(nums, L, M)
         root.right = SegmentTree.build(nums, M + 1, R)
@@ -30,7 +30,7 @@ class SegmentTree:
         self.sum = self.left.sum + self.right.sum
     
     def rangeQuery(self, L, R):
-        if self.L == L and self.R == R:
+        if (self.L == L and self.R == R):
             return self.sum
         
         M = (self.L + self.R) // 2
@@ -39,7 +39,8 @@ class SegmentTree:
         elif R <= M:
             return self.left.rangeQuery(L, R)
         else:
-            return (self.left.rangeQuery(L, M) + self.right.rangeQuery(M + 1, R))
+            return (self.left.rangeQuery(L, M) + self.right.rangeQuery(M + 1, R)) 
+        
     
 class NumArray:
 
