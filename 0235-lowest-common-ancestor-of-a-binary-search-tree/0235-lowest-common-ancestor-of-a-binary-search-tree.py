@@ -15,13 +15,12 @@ class Solution:
             if node == p or node == q:
                 return node
             
-            left = dfs(node.left)
-            right = dfs(node.right)
-            
-            if left and right:
+            if p.val <= node.val and q.val <= node.val:
+                return dfs(node.left)
+            elif p.val >= node.val and q.val >= node.val:
+                return dfs(node.right)
+            else:
                 return node
-            
-            return left or right
             
         
         return dfs(root)
