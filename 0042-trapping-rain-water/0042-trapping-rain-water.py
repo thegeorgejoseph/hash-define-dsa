@@ -1,18 +1,17 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        prefix_sum = []
+        leftHeights = []
         prefix = 0
-        for i in range(len(height)):
-            prefix = max(prefix, height[i])
-            prefix_sum.append(prefix)
-        prefix = 0
-        postfix_sum = []
-        for i in range(len(height)-1,-1,-1):
-            prefix = max(prefix, height[i])
-            postfix_sum.append(prefix)
-        postfix_sum = postfix_sum[::-1]
+        for h in height:
+            leftHeights.append(prefix)
+            prefix = max(prefix, h)
+        rightHeights = []
+        suffix = 0
+        for h in height[::-1]:
+            rightHeights.append(suffix)
+            suffix = max(suffix, h)
+        rightHeights = rightHeights[::-1]
         res = 0
-        for i in range(len(prefix_sum)):
-            res += (min(prefix_sum[i], postfix_sum[i]) - height[i]) if (min(prefix_sum[i], postfix_sum[i]) - height[i]) >= 0 else 0
+        for i in range(len(height)):
+            res += min(leftHeights[i], rightHeights[i])-height[i] if min(leftHeights[i], rightHeights[i])-height[i] > 0 else 0
         return res
-            
